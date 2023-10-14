@@ -1,0 +1,54 @@
+#zagolovok {
+    text-align: center;
+
+}
+
+.boxtext1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button1{
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.boxlist1{
+      display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxitem {
+    margin-right: 2em;
+}
+
+body {
+    background-color: #20B2AA;
+    margin-right: 15em;
+    margin-left: 15em;
+
+}
+
+.box1{
+    background-color: #00FF00;
+    border-width: 2px;
+    border-style: solid;
+    border-color: black;
+}
+
+#list1{
+    background-color: #00FFFF;
+}
+
+#list2{
+    background-color: #00FFFF;
+}
+
+#Button1{
+    background-color: #FF4500;
+}
