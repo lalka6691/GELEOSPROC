@@ -1,11 +1,10 @@
-{% load static %}
 <!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
   <title>testname</title>
-  <link rel="stylesheet" href="{% static 'CSS/style.css'%}" />
-  <script src="{% static 'JS/script.js' %}"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
 </head>
 <body>
  <header>
@@ -15,9 +14,9 @@
   <div class="boxtext1">
     <p>Сравнение процессоров</p>
   </div>
-
-<div class="dropdown1">
-  <button onclick="myFunction()" class="dropbtn2">Выпадающий</button>
+<div class="boxitem">
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Выпадающий</button>
   <div id="myDropdown" class="dropdown-content">
    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">          <!-- -->
     <a href="#about">О Нас</a>
@@ -29,8 +28,8 @@
     <a href="#tools">Инструменты</a>
   </div>
 </div>
-<p class="boxitem">VS</p>
-<div class="dropdown2">
+<p >VS</p>
+<div class="dropdown">
   <button onclick="myFunction()" class="dropbtn">Выпадающий</button>
   <div id="myDropdown" class="dropdown-content">
     <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
@@ -43,7 +42,7 @@
     <a href="#tools">Инструменты</a>
   </div>
 </div>
-
+</div>
   <div class="button1">
    <button id="Button1">Сравнить</button>
    </div>
