@@ -5,5 +5,5 @@ from .views import *
 
 urlpatterns = [
     path('', index),
-    path('addcpu/', addcpu)
+    path('cpucomparison/', cpucomparison)
 ]

@@ -11,7 +11,7 @@
  <header>
   <p id="zagolovok">GELEOSPROC</p>
  </header>
- <form method="POST" action="cpucomparison/">
+ <form method="POST">
   {% csrf_token %}
  <div class="box1">
   <div class="boxtext1">
@@ -41,5 +41,7 @@
   </div>
  </div>
 </form>
+<p>{{ cpu1Name }} VS {{ cpu2Name }}</p>
+
 </body>
 </html>
