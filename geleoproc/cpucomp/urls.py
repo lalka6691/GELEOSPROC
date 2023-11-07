@@ -1,9 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from cpucomp import views
 
 from .views import *
 
 urlpatterns = [
-    path('', index),
-    path('cpucomparison/', cpucomparison)
+    path('', home),
+    path('cpucomparison/', cpucomparison),
+    path('accounts/register/', register),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]

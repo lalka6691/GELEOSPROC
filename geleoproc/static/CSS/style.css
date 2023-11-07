@@ -111,3 +111,33 @@ body {
 
 /* Показать выпадающее меню (используйте JS, чтобы добавить этот класс в .dropdown-content содержимого, когда пользователь нажимает на кнопку выпадающего списка) */
 .show {display:block;}
+
+#header_login_link, #header_home_link, #header_logout_link {
+  position:absolute;
+   top: 15px;
+   right: 15px;
+}
+
+#login_header, #register_header {
+  text-align: center;
+}
+
+.log_reg_elements{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.log_reg_elements p {
+  margin: 5px;
+}
+
+#login_send_btn {
+  margin: 10px;
+}
+
+#login_to_reg_link{
+  color: gray;
+  font-size: 12px;
+}

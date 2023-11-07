@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+
+{% block content %}
+
+  <header id="register_header">
+      <h1>Регистрация</h1>
+      <a href="/" id="header_home_link">На главную</a>
+  <form method="POST" action="/">
+    {% csrf_token %}
+    <div class="log_reg_elements">
+        <p>Введите логин</p>
+        <input name="login" placeholder="Логин">
+        <p>Введите пароль</p>
+        <input name="password" type="password" placeholder="Пароль">
+        <button id="login_send_btn">Зарегистрировться</button>
+    </div>
+  </form>
+  </header>
+
+  {% endblock %}
