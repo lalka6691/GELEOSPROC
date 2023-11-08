@@ -3,37 +3,28 @@
 {% load static %}\
 
 {% block content %}
+<body class="log_reg_body">
+  <header id="login_header">
+      <h1>Войдите в аккаунт</h1>
+  </header>
+  <a href="/" class="top_right_links">На главную</a>
 
-<header id="login_header">
-    <h1>Войдите в аккаунт</h1>
-</header>
-<a href="/" id="header_home_link">На главную</a>
-
-{% if form.errors %}
-  <p>Логин или пароль введены неправильно.</p>
-{% endif %}
-
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
+  {% if form.errors %}
+    <p>Логин или пароль введены неправильно.</p>
   {% endif %}
-{% endif %}
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<div class="log_reg_elements">
-    <p>Введите логин</p>
-    <input name="username" placeholder="Логин">
-    <p>Введите пароль</p>
-    <input name="password" placeholder="Пароль">
+  <form method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+  <div class="log_reg_elements">
+      <p>Введите логин</p>
+      <input name="username" placeholder="Логин">
+      <p>Введите пароль</p>
+      <input name="password" placeholder="Пароль">
 
-    <input type="submit" value="Войти" />
-    <input type="hidden" name="next" value="{{ next }}" />
-    <a href="/accounts/register/" id="login_to_reg_link">Нет аккаунта? Зарегистрируйтесь.</a>
-</div>
-</form>
-
+      <input type="submit" value="Войти" id="login_send_btn"/>
+      <input type="hidden" name="next" value="{{ next }}" />
+      <a href="/accounts/register/" id="login_to_reg_link">Нет аккаунта? Зарегистрируйтесь.</a>
+  </div>
+  </form>
+</body>
 {% endblock %}

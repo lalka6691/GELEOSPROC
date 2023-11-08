@@ -3,20 +3,27 @@
 {% load static %}
 
 {% block content %}
-
+<body class="log_reg_body">
   <header id="register_header">
       <h1>Регистрация</h1>
-      <a href="/" id="header_home_link">На главную</a>
-  <form method="POST" action="/">
+      <a href="/" class="top_right_links">На главную</a>
+  <form method="POST">
     {% csrf_token %}
     <div class="log_reg_elements">
         <p>Введите логин</p>
         <input name="login" placeholder="Логин">
+
+        {% if user_exist %}
+        <div class="error">
+          <p>Пользователь с таким логином уже существует</p>
+        </div>
+        {% endif %}
+        
         <p>Введите пароль</p>
         <input name="password" type="password" placeholder="Пароль">
         <button id="login_send_btn">Зарегистрировться</button>
     </div>
   </form>
   </header>
-
+</body>
   {% endblock %}

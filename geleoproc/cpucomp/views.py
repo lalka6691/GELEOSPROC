@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import CPU, Account
+from .models import CPU
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from django.contrib.auth.models import User
 
@@ -33,7 +33,14 @@ def register(request):
         log = request.POST.get("login")
         pasw = request.POST.get("password")
 
-        user = User.objects.create_user(log, '', pasw)
+        
+
+        try:
+            user1 = User.objects.get(username=log)
+            data = {"user_exist":True}
+            return render(request, 'register.html', context=data) 
+        except ObjectDoesNotExist:
+            user = User.objects.create_user(log, '', pasw)
 
         data = {}
         return render(request, 'home.html', context=data) 

@@ -33,10 +33,25 @@
 
 body {
     background-color: #F5F5F5;
-    margin-right: 15em;
-    margin-left: 15em;
-
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Занимать 100% высоты окна браузера */ 
 }
+
+/*
+.log_reg_body {
+  background: linear-gradient(180deg, rgba(5,0,90,1) 0%, rgba(17,17,150,1) 35%, rgba(0,212,255,1) 100%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.log_reg_body header {
+  font-family: 'Times New Roman', Times, serif;
+}
+*/
 
 .box1{
     background-color: #007BFF;
@@ -112,13 +127,19 @@ body {
 /* Показать выпадающее меню (используйте JS, чтобы добавить этот класс в .dropdown-content содержимого, когда пользователь нажимает на кнопку выпадающего списка) */
 .show {display:block;}
 
-#header_login_link, #header_home_link, #header_logout_link {
+#header_login_link, #header_home_link {
   position:absolute;
    top: 15px;
    right: 15px;
 }
 
-#login_header, #register_header {
+.top_right_links {
+  position:absolute;
+   top: 15px;
+   right: 15px;
+}
+
+#login_header, #register_header, #home_header {
   text-align: center;
 }
 

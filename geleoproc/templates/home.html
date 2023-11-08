@@ -2,16 +2,24 @@
 
 {% load static %}
 
+
 {% block content %}
+<body>
   <header id="home_header">
   <h1>Главная страница</h1>
 
   {% if user.is_authenticated %}
-  <a href="/accounts/logout/" id="header_logout_link">Выход</a>
+
+  <div class="top_right_links">
+    <a href="">Корзина</a>
+    <a href="/accounts/logout/">Выход</a>
+  </div>
+  
   {% else %}
     <a href="/accounts/login/" id="header_login_link">Вход</a>
   {% endif %}
 
   
   </header>
+</body>
 {% endblock %}
