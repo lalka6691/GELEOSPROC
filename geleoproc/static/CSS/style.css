@@ -32,14 +32,15 @@
   }
 
 body {
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
     background-color: #F5F5F5;
     margin: 0;
     padding: 0;
     height: 100vh; /* Занимать 100% высоты окна браузера */ 
 }
 
-/*
-.log_reg_body {
+
+._body {
   background: linear-gradient(180deg, rgba(5,0,90,1) 0%, rgba(17,17,150,1) 35%, rgba(0,212,255,1) 100%);
   display: flex;
   justify-content: center;
@@ -48,10 +49,141 @@ body {
   height: 100vh;
 }
 
-.log_reg_body header {
-  font-family: 'Times New Roman', Times, serif;
+.title, .log_reg_elements {
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
 }
-*/
+
+.title {
+  color: rgba(0,212,255,1);
+  font-size: 24px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+._body #register_title {
+  width: auto;
+}
+
+.log_reg_back {
+  width: 33%;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, .2);
+  border-radius: 15px;
+  animation: showDown 0.7s;
+}
+
+@keyframes showDown {
+  from {transform:translate(0%, -75%);}
+  to {transform:translate(0%, 0%);}
+  }
+
+  @keyframes showDownHome {
+    from {transform:translate(0%, -350%);}
+    to {transform:translate(0%, 0%);}
+    }
+
+.log_reg_input, #login_send_btn , #reg_send_btn {
+  background-color: rgba(208, 208, 208, 0.552);
+  width: 80%;
+  padding: 5px;
+  height: 45px;
+  margin: 20px;
+  border-radius: 5px;
+  color: white;
+  border-color: white;
+  border-width: 0px;
+  text-align: left;
+  font-size: 16px;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
+.log_reg_input::placeholder {
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  color: white;
+}
+
+#login_send_btn, #reg_send_btn {
+  background-color: rgba(0,212,255,1);
+  width: 25%;
+  text-align: center;
+}
+
+#reg_send_btn {
+  width: 60%;
+  margin: 10px;
+}
+
+.log_reg_links {
+  margin: 20px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.log_reg_links a {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+#reg_to_login_link {
+  margin: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.top_right_links {
+  background-color: rgba(0,212,255,1);
+  padding: 10px;
+  color: black;
+  border-width: 0px;
+  border-radius: 5px;
+  position:absolute;
+   top: 15px;
+   right: 15px;
+  text-decoration: none;
+  box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, .2);
+}
+
+.top_right_links_home {
+  display: flex;
+  width: 170px;
+  justify-content: space-between;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.top_right_links_home a, .btn {
+  background-color: rgba(0,212,255,1);
+  padding: 10px;
+  color: black;
+  border-width: 0px;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, .2);
+}
+
+#home_title {
+  animation: showDownHome 0.7s;
+}
+
+#login_title, #register_title, #home_title {
+  text-align: center;
+}
+
+#logout_text{
+  color: white;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  font-size: 24px;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  font-size: 14px;
+}
 
 .box1{
     background-color: #007BFF;
@@ -59,7 +191,6 @@ body {
     border-style: solid;
     border-radius: 30px;
 }
-
 
 #Button1{
     background-color: #FF4500;
@@ -73,7 +204,6 @@ body {
   border: none;
   cursor: pointer;
 }
-
 
 /* Кнопка выпадающего меню при наведении и фокусировке */
 .dropbtn:hover, .dropbtn:focus {
@@ -100,7 +230,6 @@ body {
   display: inline-block;
 }
 
-
 /* Выпадающее содержимое (скрыто по умолчанию) */
 .dropdown-content {
   display: none;
@@ -110,8 +239,6 @@ body {
   border: 1px solid #ddd;
   z-index: 1;
 }
-
-
 
 /* Ссылки внутри выпадающего списка */
 .dropdown-content p {
@@ -127,22 +254,6 @@ body {
 /* Показать выпадающее меню (используйте JS, чтобы добавить этот класс в .dropdown-content содержимого, когда пользователь нажимает на кнопку выпадающего списка) */
 .show {display:block;}
 
-#header_login_link, #header_home_link {
-  position:absolute;
-   top: 15px;
-   right: 15px;
-}
-
-.top_right_links {
-  position:absolute;
-   top: 15px;
-   right: 15px;
-}
-
-#login_header, #register_header, #home_header {
-  text-align: center;
-}
-
 .log_reg_elements{
   display: flex;
   flex-direction: column;
@@ -154,11 +265,5 @@ body {
   margin: 5px;
 }
 
-#login_send_btn {
-  margin: 10px;
-}
 
-#login_to_reg_link{
-  color: gray;
-  font-size: 12px;
-}
+

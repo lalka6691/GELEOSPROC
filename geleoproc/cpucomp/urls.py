@@ -7,5 +7,6 @@ urlpatterns = [
     path('', home),
     path('cpucomparison/', cpucomparison),
     path('accounts/register/', register),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('WIP/', WIP)
 ]

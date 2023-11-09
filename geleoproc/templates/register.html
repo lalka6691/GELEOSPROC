@@ -3,27 +3,33 @@
 {% load static %}
 
 {% block content %}
-<body class="log_reg_body">
-  <header id="register_header">
-      <h1>Регистрация</h1>
-      <a href="/" class="top_right_links">На главную</a>
-  <form method="POST">
-    {% csrf_token %}
-    <div class="log_reg_elements">
-        <p>Введите логин</p>
-        <input name="login" placeholder="Логин">
+<body class="_body">
+  <a href="/" class="top_right_links">На главную</a>
+  <div class="log_reg_back">
+    <header id="register_title" class="title">
+        <h1>Регистрация</h1>
+    </header>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="log_reg_elements">
 
-        {% if user_exist %}
-        <div class="error">
-          <p>Пользователь с таким логином уже существует</p>
-        </div>
-        {% endif %}
-        
-        <p>Введите пароль</p>
-        <input name="password" type="password" placeholder="Пароль">
-        <button id="login_send_btn">Зарегистрировться</button>
-    </div>
-  </form>
-  </header>
+          {% if user_exist %}
+          <div class="error">
+            <p>Пользователь с таким логином уже существует</p>
+          </div>
+          {% endif %}
+
+          <input name="login" placeholder="Логин" class="log_reg_input">
+
+          <input name="email" placeholder="Email" class="log_reg_input">
+          <input name="password" type="password" placeholder="Пароль" class="log_reg_input">
+          
+          <button id="reg_send_btn">Зарегистрировться</button>
+          <div class="log_reg_links" id="reg_to_login_link">
+            <a href="/accounts/login/">Войти</a>
+          </div>
+      </div>
+    </form>
+  </div>
 </body>
   {% endblock %}

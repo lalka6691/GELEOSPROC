@@ -32,6 +32,7 @@ def register(request):
     elif request.method == "POST":
         log = request.POST.get("login")
         pasw = request.POST.get("password")
+        mail = request.POST.get("email")
 
         
 
@@ -40,8 +41,11 @@ def register(request):
             data = {"user_exist":True}
             return render(request, 'register.html', context=data) 
         except ObjectDoesNotExist:
-            user = User.objects.create_user(log, '', pasw)
+            user = User.objects.create_user(log, mail, pasw)
 
         data = {}
         return render(request, 'home.html', context=data) 
 
+def WIP(request):
+    data = {}
+    return render(request, 'WIP.html', context=data) 

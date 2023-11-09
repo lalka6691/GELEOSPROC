@@ -4,22 +4,21 @@
 
 
 {% block content %}
-<body>
-  <header id="home_header">
+<body class="_body">
+  <div id="home_title" class="title">
   <h1>Главная страница</h1>
-
+  </div>
   {% if user.is_authenticated %}
 
-  <div class="top_right_links">
+  <div class="top_right_links_home">
     <a href="">Корзина</a>
     <a href="/accounts/logout/">Выход</a>
   </div>
   
   {% else %}
-    <a href="/accounts/login/" id="header_login_link">Вход</a>
+    <a href="/accounts/login/" class="top_right_links">Вход</a>
   {% endif %}
 
-  
-  </header>
+
 </body>
 {% endblock %}
