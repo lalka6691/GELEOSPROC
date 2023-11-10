@@ -19,7 +19,7 @@ def cpucomparison(request):
 
 
 def home(request):
-    data = {}
+    data = {"cnt":range(3)}
     return render(request, 'home.html', context=data) 
 
 

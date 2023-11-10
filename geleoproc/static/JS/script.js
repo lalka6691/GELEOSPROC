@@ -39,7 +39,6 @@ function showDropdown(idinp, iddiv) {
   filterFunction(idinp, iddiv);
 }
 
-// Скрыть выпадающий список при потере фокуса
 document.addEventListener('click', function(e) {
   var dropdown = document.getElementById('myDropdown');
   var dropdown2 = document.getElementById('myDropdown2');
