@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function() {
+  filterFunction("input_1", "cpu_list_1");
+  filterFunction("input_2", "cpu_list_2");
+});
 
 function filterFunction(idinp, iddiv) {
   var input, filter, div, p, i, txtValue;
@@ -22,31 +26,49 @@ function filterFunction(idinp, iddiv) {
   }
 }
 
-function insertText(element) {
+function insertText(element, inputId) {
   var selectedText = element.innerText;
   var firstParentId = element.parentElement.id; // ID первого родителя (родительский элемент <div>)
-  var secondParentId = element.parentElement.parentElement.id; // ID второго родителя (родительский элемент <div> этого <div>)
-  var parentDiv = document.getElementById(secondParentId); // Получаем родительский div по его ID
-  var inputId = parentDiv.querySelector('input').id; // Получаем ID input внутри div
   document.getElementById(inputId).value = selectedText;
 
   filterFunction(inputId, firstParentId);
 }
 
-function showDropdown(idinp, iddiv) {
-  var dropdown = document.getElementById(iddiv);
-  dropdown.style.display = 'block';
-  filterFunction(idinp, iddiv);
+function choiceToggle(inputID){
+  if (inputID === "input_1"){
+    var choiceItems = document.getElementById("cpu_list_1");
+  }
+  else{
+    var choiceItems = document.getElementById("cpu_list_2");
+  }
+  choiceItems.classList.toggle('hidden');
+}
+
+function choiceOpen(inputID){
+  if (inputID === "input_1"){
+    var choiceItems = document.getElementById("cpu_list_1");
+  }
+  else{
+    var choiceItems = document.getElementById("cpu_list_2");
+  }
+  choiceItems.classList.remove('hidden');
 }
 
 document.addEventListener('click', function(e) {
-  var dropdown = document.getElementById('myDropdown');
-  var dropdown2 = document.getElementById('myDropdown2');
-  if (!e.target.matches('.dropdown, .dropdown *')) {
-    dropdown.style.display = 'none';
+  var input1 = document.getElementById("input_1");
+  var input2 = document.getElementById("input_2");
+
+  if (!input1.classList.contains("hidden")){
+    var choiceItems = document.getElementById('cpu_list_1');
+    if (!e.target.matches('#cpu_list_1, #input_1')) {
+      choiceItems.classList.add('hidden');
+    }  
   }
-  if (!e.target.matches('.dropdown2, .dropdown2 *')) {
-    dropdown2.style.display = 'none';
+
+  if (!input2.classList.contains("hidden")){
+    var choiceItems = document.getElementById('cpu_list_2');
+    if (!e.target.matches('#cpu_list_2, #input_2')) {
+      choiceItems.classList.add('hidden');
+    }  
   }
-  
 });

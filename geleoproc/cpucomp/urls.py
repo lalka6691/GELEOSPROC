@@ -8,5 +8,6 @@ urlpatterns = [
     path('cpucomparison/', cpucomparison),
     path('accounts/register/', register),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('WIP/', WIP)
+    path('WIP/', WIP),
+    path('cpucomp/', index)
 ]

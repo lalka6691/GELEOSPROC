@@ -1,59 +1,30 @@
-#zagolovok {
-    text-align: center;
-
-}
-
-.boxtext1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.button1{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1em;
-}
-
-.boxlist1{
-      display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.boxitem {
-    margin-right: 2em;
-    display: flex;
-    justify-content: center;
-    gap: 2em;
-    margin-bottom: 2em;
-  }
-
 body {
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
     background-color: #F5F5F5;
     margin: 0;
     padding: 0;
-    height: 100vh; /* Занимать 100% высоты окна браузера */ 
 }
 
 
-._body {
+._body, ._body_comp {
   background: linear-gradient(180deg, rgba(5,0,90,1) 0%, rgba(17,17,150,1) 35%, rgba(0,212,255,1) 100%);
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  background-attachment: fixed; /* Зафиксировать фон */
+}
+
+._body_comp {
+  height: auto;
 }
 
 .title, .log_reg_elements {
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
 }
 
-.title {
+.title{
   color: rgba(0,212,255,1);
   font-size: 24px;
   padding-left: 15px;
@@ -154,7 +125,7 @@ body {
   right: 15px;
 }
 
-.top_right_links_home a, .btn, .cart_btn {
+.top_right_links_home a, .btn, .cart_btn, .link_to_comp a  {
   cursor: pointer;
   background-color: rgba(0,212,255,1);
   padding: 10px;
@@ -164,6 +135,12 @@ body {
   text-decoration: none;
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
   box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, .2);
+}
+
+.link_to_comp {
+  position: absolute;
+  top: 30px;
+  left: 15px;
 }
 
 #home_title {
@@ -189,6 +166,7 @@ body {
 
 .hidden {
   opacity: 0;
+  pointer-events: none;
 }
 
 .cart {
@@ -245,75 +223,6 @@ body {
   margin-right: 10px;
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
 }
-
-.box1{
-    background-color: #007BFF;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 30px;
-}
-
-#Button1{
-    background-color: #FF4500;
-}
-/* Кнопка выпадающего списка */
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Кнопка выпадающего меню при наведении и фокусировке */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #3e8e41;
-}
-
-/* Поле поиска */
-#myInput, #myInput2 {
-  box-sizing: border-box;
-  background-position: 14px 12px;
-  background-repeat: no-repeat;
-  font-size: 16px;
-  padding: 14px 20px 12px 45px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Поле поиска, когда он получает фокус/нажал на */
-#myInput:focus, #myInput2:focus {outline: 3px solid #ddd;}
-
-/* Контейнер <div> - необходим для размещения выпадающего содержимого */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Выпадающее содержимое (скрыто по умолчанию) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f6f6f6;
-  min-width: 230px;
-  border: 1px solid #ddd;
-  z-index: 1;
-}
-
-/* Ссылки внутри выпадающего списка */
-.dropdown-content p {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Изменение цвета выпадающих ссылок при наведении курсора */
-.dropdown-content p:hover {background-color: #f1f1f1}
-
-/* Показать выпадающее меню (используйте JS, чтобы добавить этот класс в .dropdown-content содержимого, когда пользователь нажимает на кнопку выпадающего списка) */
-.show {display:block;}
 
 .log_reg_elements{
   display: flex;

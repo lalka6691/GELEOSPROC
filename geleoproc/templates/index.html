@@ -1,45 +1,52 @@
+{% extends "base_generic.html" %}
+
 {% load static %}
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <title>testname</title>
-  <link rel="stylesheet" href="{% static 'CSS/style.css'%}"/>
-  <script src="{% static 'JS/script.js' %}"></script>
-</head>
-<body>
- <header>
-  <p id="zagolovok">GELEOSPROC</p>
- </header>
- <form method="POST" action="cpucomparison/">
-  {% csrf_token %}
- <div class="box1">
-  <div class="boxtext1">
-    <p>Сравнение процессоров</p>
-  </div>
-  <div class="boxitem">
-    <div class="dropdown" id="dropdown">
-        <input name="cpu1" type="text" placeholder="Название процессора" id="myInput" onkeyup="filterFunction('myInput', 'myDropdown')" onfocus="showDropdown('myInput', 'myDropdown')">    
-        <div id="myDropdown" class="dropdown-content">
+
+{% block content %}
+
+<a href="/" class="top_right_links">На главную</a>
+
+<body class="_body">
+  <div class="log_reg_back">
+    <form method="POST" action="/cpucomparison/">
+      {% csrf_token %}
+    <div class="log_reg_elements">
+      <div id="comp_title" class="title">
+        <h1>Сравнить процессоры</h1>
+      </div>
+      <form method="POST" action="/cpucomparison/">
+      <div class="cpu_choice">
+        <div>
+          <input name="cpu1" class="input_cpu_name log_reg_input" placeholder="Название" id="input_1" onClick="choiceToggle(this.id)" onkeyup="filterFunction(this.id, 'cpu_list_1'); choiceOpen(this.id);">
+        </div>
+        <div class="cpu_list_items hidden" id="cpu_list_1" >
           {% for cpu in CPUS %}
-            <p onclick="insertText(this)">{{ cpu.name }}</p>
+            <p onClick="insertText(this, 'input_1')">{{ cpu.name }}</p>
+          {% endfor %}
+        </div>
+
+        <p> VS </p>
+
+        <div>
+          <input name="cpu2" class="input_cpu_name log_reg_input" placeholder="Название" id="input_2" onClick="choiceToggle(this.id)" onkeyup="filterFunction(this.id, 'cpu_list_2'); choiceOpen(this.id);">
+        </div>
+        <div class="cpu_list_items hidden" id="cpu_list_2">
+          {% for cpu in CPUS %}
+            <p onClick="insertText(this, 'input_2')">{{ cpu.name }}</p>
           {% endfor %}
         </div>
       </div>
-    <p >VS</p>
-    <div class="dropdown2" id="dropdown2">
-      <input name="cpu2" type="text" placeholder="Название процессора" id="myInput2" onkeyup="filterFunction('myInput2', 'myDropdown2')" onfocus="showDropdown('myInput2', 'myDropdown2')">
-      <div id="myDropdown2" class="dropdown-content">
-          {% for cpu in CPUS %}
-            <p onclick="insertText(this)">{{ cpu.name }}</p>
-          {% endfor %}
-      </div>
+
+      <button id="comp_btn" class="btn" type="submit" value="Send">Сравнить</button>
+    
     </div>
+  </form>
   </div>
-  <div class="button1">
-   <button id="Button1" type="submit" value="Send">Сравнить</button>
-  </div>
- </div>
-</form>
+
+
+
+
+<script src="{% static 'JS/script.js' %}"></script>
+<link rel="stylesheet" href="{% static 'CSS/style2.css'%}"/>
 </body>
-</html>
+{% endblock %}

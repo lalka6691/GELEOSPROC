@@ -1,6 +1,6 @@
 function cartOpen(){
     var cart = document.getElementById("cart");
-    cart.classList.remove('hidden');
+    cart.classList.toggle('hidden');
 }
 
 document.addEventListener('click', function(e) {
