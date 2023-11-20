@@ -1,5 +1,5 @@
 import json
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .models import CPU, UserProfile
@@ -13,18 +13,31 @@ def index(request):
 
 
 
+def ajax_post_cart(request):
+    if request.method == 'POST':
+
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+            user_profile = UserProfile.objects.get(user=request.user)
+            user_profile.cart_data = data
+            user_profile.save()
+            return JsonResponse({'success': True})
+            
+        except json.JSONDecodeError:
+            return JsonResponse({'success': False, 'errors': 'Invalid JSON data'})
+
+
 def cpucomparison(request):
     # Если заходить без логина, то крашится, надо починить!
     # Нужно добавить обработку того что выбран только один процессор
+    cart_data = None
     n = 3
     if request.user.is_authenticated:
         # Получаем профиль пользователя
         user_profile = UserProfile.objects.get(user=request.user)
+        cart_data = user_profile.cart_data
         n = user_profile.cart_data["cnt_cart_items"]
         
-
-
-    
     cpu1 = request.POST.get("cpu1")
     cpu2 = request.POST.get("cpu2")
     
@@ -35,20 +48,25 @@ def cpucomparison(request):
         
     except:
         data = {"CPUS": CPU.objects.all(), "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":False,
-                 "range":range(n), "cnt":n, 'cart_json':json.dumps(user_profile.cart_data)}
+                 'cart_json':json.dumps(cart_data)}
         
         return render(request, 'comparsion.html', context=data) 
 
     data = {"CPUS": CPU.objects.all(), "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":True, 
-            "cpu1cost":cpu_model1.cost, "cpu2cost":cpu_model2.cost, "range":range(n), "cnt":n,
-              'cart_json':json.dumps(user_profile.cart_data)}
+            "cpu1cost":cpu_model1.cost, "cpu2cost":cpu_model2.cost,
+              'cart_json':json.dumps(cart_data)}
     
     return render(request, 'comparsion.html', context=data) 
 
 
 
 def home(request):
-    data = {"cnt":range(3)}
+    if request.user.is_authenticated:
+        # Получаем профиль пользователя
+        user_profile = UserProfile.objects.get(user=request.user)
+        data = {'cart_json':json.dumps(user_profile.cart_data)}
+    else:
+        data = {}
     return render(request, 'home.html', context=data) 
 
 

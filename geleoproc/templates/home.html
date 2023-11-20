@@ -5,6 +5,8 @@
 
 {% block content %}
 <body class="_body">
+  {% csrf_token %}
+  <div id="myDataElement" data-django-variable="{{ cart_json }}"></div>
   <script src="{% static 'JS/cart.js' %}"></script>
   <div id="home_title" class="title">
   <h1>Главная страница</h1>
@@ -20,32 +22,10 @@
     <button class="btn" onclick="cartOpen()">Корзина</button>
     <a href="/accounts/logout/">Выход</a>
   </div>
-  
-  
-
-  <div class="cart hidden" id="cart">
-    <button class="clear_cart">Очистить корзину</button>
-
-    {% for i in cnt %}
-      <div class="cart_elem">
-        <div class="cart_elem_1">
-          <p class="processor_name">Название процессора</p>
-          <p class="count">Количество</p>
-        </div>
-        <div class="cart_elem_2">
-          <button class="delete_cart_elem">X</button>
-          <p class="processor_cost">Цена</p>
-        </div>
-      </div>
-    {% endfor %}
-  
-    <button class="cart_btn">В корзину</button>
-  </div>
 
   {% else %}
     <a href="/accounts/login/" class="top_right_links">Вход</a>
   {% endif %}
-
 
 </body>
 {% endblock %}

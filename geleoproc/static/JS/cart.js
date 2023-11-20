@@ -110,6 +110,7 @@ function cpuAddToCart(cpuName, cpuCost){
   if (cpuName in myData){
     myData[cpuName].Count += 1;
     myData[cpuName].Cost += Number(cpuCost);
+    cnt_cpu_item += 1;
   }
   else {
     myData[cpuName] = {
@@ -119,6 +120,7 @@ function cpuAddToCart(cpuName, cpuCost){
     cnt_cpu_item += 1;
   }
   if (cart !== null) cartDelete(cart);
+  
 }
 
 function deleteCartItem(cpuName){
@@ -129,8 +131,38 @@ function deleteCartItem(cpuName){
 }
 
 window.addEventListener('beforeunload', function(event) {
-  // Ваш код, который нужно выполнить перед выгрузкой страницы
-  // Например, сохранение данных, отправка запросов на сервер и так далее...
-  console.log('Страница закрывается!');
+  
+  myData['cnt_cart_items'] = cnt_cpu_item;
+
+  var data = myData;
+
+  var xhr = new XMLHttpRequest();
+  
+  var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+    xhr.open('POST', '/ajax_post_cart/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('X-CSRFToken', csrfToken);
+
+    
+
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        var response = JSON.parse(xhr.responseText);
+        if (response.success) {
+          console.log('Данные успешно добавлены');
+        } else {
+          console.error('Произошла ошибка:', response.errors);
+        }
+      } else {
+        console.error('Произошла ошибка при выполнении запроса.');
+      }
+    };
+
+    xhr.onerror = function() {
+      console.error('Произошла ошибка при выполнении запроса.');
+    };
+
+    xhr.send(JSON.stringify(data));
 
 });

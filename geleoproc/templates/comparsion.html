@@ -65,11 +65,13 @@
       <td>{{ cpu1cost }}$</td>
       <td>{{ cpu2cost }}$</td> 
     </tr>
+    {% if user.is_authenticated%}
     <tr>
       <td></td>
       <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpu1Name }}', '{{ cpu1cost }}')">Купить</button></td>
       <td><button id="buy_btn2" class="btn" onClick="cpuAddToCart('{{ cpu2Name }}', '{{ cpu2cost }}')">Купить</button></td> 
     </tr>
+    {% endif %}
   </table>
   {% else %}
   <p>Данные введены неправильно!</p>
