@@ -4,7 +4,19 @@
 
 {% block content %}
 <body class="_body_comp">
-  <a href="/" class="top_right_links">На главную</a>
+  <div id="myDataElement" data-django-variable="{{ cart_json }}"></div>
+
+  {% if user.is_authenticated%}
+
+  <div class="top_right_links_home" style="width: 200px;">
+    <button class="btn" onclick="cartOpen()">Корзина</button>
+    <a href="/">На главную</a>
+  </div>
+
+  {% else %}
+    <a href="/" class="top_right_links">На главную</a>
+  {% endif %}
+
   <div class="log_reg_back no_anim" style="margin-top: 210px;">
     <form method="POST" action="/cpucomparison/">
       {% csrf_token %}
@@ -40,11 +52,31 @@
     </div>
   </form>
   </div>
-
-<p>{{ cpu1Name }} VS {{ cpu2Name }}</p>
-<p>Тут будет много информации</p>
+  
+  {% if valid_info %}
+  <table border="1" width="75%" cellpadding="5">
+    <tr>
+      <td>Название процессора</td>
+      <td>{{ cpu1Name }}</td>
+      <td>{{ cpu2Name }}</td> 
+    </tr>
+    <tr>
+      <td>Цена</td>
+      <td>{{ cpu1cost }}$</td>
+      <td>{{ cpu2cost }}$</td> 
+    </tr>
+    <tr>
+      <td></td>
+      <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpu1Name }}', '{{ cpu1cost }}')">Купить</button></td>
+      <td><button id="buy_btn2" class="btn" onClick="cpuAddToCart('{{ cpu2Name }}', '{{ cpu2cost }}')">Купить</button></td> 
+    </tr>
+  </table>
+  {% else %}
+  <p>Данные введены неправильно!</p>
+  {% endif %}
 
 <script src="{% static 'JS/script.js' %}"></script>
+<script src="{% static 'JS/cart.js' %}"></script>
 <link rel="stylesheet" href="{% static 'CSS/style2.css'%}"/>
 </body>
 {% endblock %}

@@ -9,5 +9,5 @@ urlpatterns = [
     path('accounts/register/', register),
     path('accounts/', include('django.contrib.auth.urls')),
     path('WIP/', WIP),
-    path('cpucomp/', index)
+    path('cpucomp/', index),
 ]
