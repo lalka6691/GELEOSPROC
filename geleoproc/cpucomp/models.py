@@ -4,7 +4,12 @@ from django.db import models
 class CPU(models.Model):
     name = models.CharField(max_length=20)
     cost = models.IntegerField()
-    testtext = models.CharField(max_length=100)
+    cores = models.IntegerField()
+    threads = models.IntegerField()
+    base_freq = models.FloatField()
+    max_freq = models.FloatField()
+    max_temp = models.IntegerField()
+    win11 = models.CharField(max_length=1)
 
     def __str__(self):
         return self.name
