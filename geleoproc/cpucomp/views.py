@@ -3,9 +3,12 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .models import CPU, UserProfile
-from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned, ValidationError
 from django.contrib.auth.models import User
 from .signals import *
+from django.core.validators import validate_email
+
+
 
 def index(request):
     data = {"CPUS": CPU.objects.all()} 
@@ -28,15 +31,10 @@ def ajax_post_cart(request):
 
 
 def cpucomparison(request):
-    # Если заходить без логина, то крашится, надо починить!
-    # Нужно добавить обработку того что выбран только один процессор
     cart_data = None
-    n = 3
     if request.user.is_authenticated:
-        # Получаем профиль пользователя
         user_profile = UserProfile.objects.get(user=request.user)
         cart_data = user_profile.cart_data
-        n = user_profile.cart_data["cnt_cart_items"]
         
     cpu1 = request.POST.get("cpu1")
     cpu2 = request.POST.get("cpu2")
@@ -62,7 +60,6 @@ def cpucomparison(request):
 
 def home(request):
     if request.user.is_authenticated:
-        # Получаем профиль пользователя
         user_profile = UserProfile.objects.get(user=request.user)
         data = {'cart_json':json.dumps(user_profile.cart_data)}
     else:
@@ -81,14 +78,18 @@ def register(request):
         pasw = request.POST.get("password")
         mail = request.POST.get("email")
 
-        
-
         try:
-            user1 = User.objects.get(username=log)
-            data = {"user_exist":True}
+            validate_email(mail)
+        except ValidationError as e:
+            data = {"email_invalid":True}
             return render(request, 'register.html', context=data) 
-        except ObjectDoesNotExist:
-            user = User.objects.create_user(log, mail, pasw)
+        else:
+            try:
+                user1 = User.objects.get(username=log)
+                data = {"user_exist":True}
+                return render(request, 'register.html', context=data) 
+            except ObjectDoesNotExist:
+                user = User.objects.create_user(log, mail, pasw)
 
         data = {}
         return render(request, 'home.html', context=data) 

@@ -1,8 +1,8 @@
 body {
   font-family: 'Trebuchet MS', Helvetica, sans-serif;
-    background-color: #F5F5F5;
-    margin: 0;
-    padding: 0;
+  background-color: #F5F5F5;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -110,15 +110,15 @@ body {
   border-width: 0px;
   border-radius: 5px;
   position:absolute;
-   top: 15px;
-   right: 15px;
+  top: 15px;
+  right: 15px;
   text-decoration: none;
   box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, .2);
 }
 
 .top_right_links_home {
   display: flex;
-  width: 170px;
+  width: 180px;
   justify-content: space-between;
   position: absolute;
   top: 15px;

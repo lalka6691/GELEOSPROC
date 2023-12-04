@@ -4,7 +4,7 @@
 
 {% block content %}
 <body class="_body">
-  <a href="/" class="top_right_links">На главную</a>
+  <a href="/" class="top_right_links"><i class="fas fa-home"></i> На главную</a>
   <div class="log_reg_back">
     <header id="register_title" class="title">
         <h1>Регистрация</h1>
@@ -20,7 +20,11 @@
           {% endif %}
 
           <input name="login" placeholder="Логин" class="log_reg_input">
-
+          {% if email_invalid %}
+          <div class="error">
+            <p>Почта введена неправильно</p>
+          </div>
+          {% endif %}
           <input name="email" placeholder="Email" class="log_reg_input">
           <input name="password" type="password" placeholder="Пароль" class="log_reg_input">
           

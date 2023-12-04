@@ -13,18 +13,18 @@
   </div>
 
   <div class="link_to_comp">
-    <a href="/cpucomp/">Сравнение процессоров</a>
+    <a href="/cpucomp/"><i class="fas fa-balance-scale"></i> Сравнение процессоров</a>
   </div>
 
   {% if user.is_authenticated %}
 
   <div class="top_right_links_home">
-    <button class="btn" onclick="cartOpen()">Корзина</button>
-    <a href="/accounts/logout/">Выход</a>
+    <button class="btn" onclick="cartOpen()"><i class="fas fa-shopping-cart"></i> Корзина</button>
+    <a href="/accounts/logout/"><i class="fas fa-sign-out-alt"></i> Выход</a>
   </div>
 
   {% else %}
-    <a href="/accounts/login/" class="top_right_links">Вход</a>
+    <a href="/accounts/login/" class="top_right_links"><i class="fas fa-sign-in-alt"></i> Вход</a>
   {% endif %}
 
 </body>
