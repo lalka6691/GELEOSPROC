@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 function cartOpen(){
-    var cart = document.getElementById("cart");
+    let cart = document.getElementById("cart");
     if (cart === null){
       cartCreate();
       addCartItems(); 
@@ -27,7 +27,7 @@ function cartOpen(){
 }
 
 document.addEventListener('click', function(e) {
-    var cart = document.getElementById('cart');
+    let cart = document.getElementById('cart');
     if (cart !== null)
     {
       if (!e.target.matches('.cart, .cart *, .btn')) {
@@ -38,24 +38,24 @@ document.addEventListener('click', function(e) {
 
 function cartCreate(){
     
-    var cart = document.createElement('div');
+    let cart = document.createElement('div');
     cart.className = 'cart animated';
     cart.id = 'cart';
 
-    var clearButton = document.createElement('button');
+    let clearButton = document.createElement('button');
     clearButton.className = 'clear_cart';
     clearButton.textContent = 'Очистить корзину';
     clearButton.onclick = cartEmpty;
     cart.appendChild(clearButton);
 
-    var cartContainer = document.createElement('div');
+    let cartContainer = document.createElement('div');
     cartContainer.id = 'cartContainer';
     cart.appendChild(cartContainer);
 
-    var toCartBtn = document.createElement('a');
+    let toCartBtn = document.createElement('a');
     toCartBtn.className = 'cart_btn';
     toCartBtn.textContent = 'В корзину';
-    toCartBtn.href = '/WIP/';
+    toCartBtn.href = '/cart/';
     cart.appendChild(toCartBtn);
 
     document.body.appendChild(cart);
@@ -76,15 +76,19 @@ function addCartItems() {
   for (let key in myData){
     if (key === 'cnt_cart_items') continue;
     
-    var cartItem = document.createElement('div');
+    let cartItem = document.createElement('div');
     cartItem.className = 'cart_elem';
     cartItem.innerHTML = `
       <div class="cart_elem_1">
-          <p class="processor_name">${key}</p>
+        <p class="processor_name">${key}</p>
+        <div class="cart_name_count">
+          <button name="${key}" class="cart_plus_minus" onClick="CartItemMinus(this)">-</button>
           <p class="count">${myData[key].Count} шт.</p>
+          <button name="${key}" class="cart_plus_minus" onClick="CartItemPlus(this)">+</button>
+        </div>
       </div>
       <div class="cart_elem_2">
-          <button name="${key}" class="delete_cart_elem" onClick="deleteCartItem(this.name)">X</button>
+          <button name="${key}" class="delete_cart_elem" onClick="deleteCartItem(this)">X
           <p class="processor_cost">${myData[key].Cost}$</p>
       </div>
     `;
@@ -99,13 +103,13 @@ function cartEmpty(){
     myData = {
       'cnt_cart_items': 0
     }
-    var cart = document.getElementById('cart');
+    let cart = document.getElementById('cart');
     cartDelete(cart);
 }
 
 function cpuAddToCart(cpuName, cpuCost){
 
-  var cart = document.getElementById('cart');
+  let cart = document.getElementById('cart');
 
   if (cpuName in myData){
     myData[cpuName].Count += 1;
@@ -124,21 +128,37 @@ function cpuAddToCart(cpuName, cpuCost){
 }
 
 function deleteCartItem(cpuName){
-  var cart = document.getElementById('cart');
+  let cart = document.getElementById('cart');
   delete myData[cpuName];
   if (cart !== null) cartDelete(cart);
   cnt_cpu_item -= 1;
+}
+
+function CartItemPlus(CartElem){
+  cpuName = CartElem.name;
+  myData[cpuName].Count += 1;
+  CartElem.previousSibling.previousSibling.textContent = String(myData[cpuName].Count) + ' ' + 'шт.';
+}
+
+function CartItemMinus(CartElem){
+  cpuName = CartElem.name;
+  if (myData[cpuName].Count === 1){
+    deleteCartItem(cpuName);
+    return
+  }
+  myData[cpuName].Count -= 1;
+  CartElem.nextSibling.nextSibling.textContent = String(myData[cpuName].Count) + ' ' + 'шт.';
 }
 
 window.addEventListener('beforeunload', function(event) {
   
   myData['cnt_cart_items'] = cnt_cpu_item;
 
-  var data = myData;
+  let data = myData;
 
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   
-  var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+  let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
     xhr.open('POST', '/ajax_post_cart/', true);
     xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');

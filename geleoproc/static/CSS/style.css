@@ -241,6 +241,22 @@ body {
   padding-left: 10px;
 }
 
+.cart_name_count{
+  display: flex;
+}
+
+.delete_cart_elem {
+  width: 50%;
+  height: 25%;
+}
+
+.cart_plus_minus {
+  height: 50%;
+  margin: 16px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
 .cart_btn {
   width: 25%;
   align-self: self-end;

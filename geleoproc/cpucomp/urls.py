@@ -10,5 +10,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('WIP/', WIP),
     path('cpucomp/', index),
+    path('cart/', cart),
     path('ajax_post_cart/', ajax_post_cart, name='ajax_post_cart'),
 ]

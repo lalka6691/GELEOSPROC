@@ -93,6 +93,12 @@ def register(request):
         data = {}
         return render(request, 'home.html', context=data) 
 
+def cart(request):
+    user_profile = UserProfile.objects.get(user=request.user)
+    cart_data = user_profile.cart_data
+    data = {'cart_json':json.dumps(cart_data)} 
+    return render(request, 'cart.html', context=data) 
+
 def WIP(request):
     data = {}
     return render(request, 'WIP.html', context=data) 
