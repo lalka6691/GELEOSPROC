@@ -62,16 +62,62 @@
     </tr>
     <tr>
       <td>Цена</td>
-      <td>{{ cpu1cost }}$</td>
-      <td>{{ cpu2cost }}$</td> 
+      {% if cpu1.cost != 0 %}
+      <td>{{ cpu1.cost }} ₽</td>
+      {% else %}
+      <td>-</td>
+      {% endif %}
+      {% if cpu2.cost != 0 %}
+      <td>{{ cpu2.cost }} ₽</td>
+      {% else %}
+      <td>-</td>
+      {% endif %}
     </tr>
     {% if user.is_authenticated%}
     <tr>
       <td></td>
-      <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpu1Name }}', '{{ cpu1cost }}')">В корзину</button></td>
-      <td><button id="buy_btn2" class="btn" onClick="cpuAddToCart('{{ cpu2Name }}', '{{ cpu2cost }}')">В корзину</button></td> 
+      {% if cpu1.cost != 0 %}
+      <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpu1Name }}', '{{ cpu1.cost }}')">В корзину</button></td>
+      {% else %}
+      <td></td>
+      {% endif %}
+      {% if cpu2.cost != 0 %}
+      <td><button id="buy_btn2" class="btn" onClick="cpuAddToCart('{{ cpu2Name }}', '{{ cpu2.cost }}')">В корзину</button></td> 
+      {% else %}
+      <td></td>
+      {% endif %}
     </tr>
     {% endif %}
+    <tr>
+      <td>Ядра</td>
+      <td>{{ cpu1.cores }}</td>
+      <td>{{ cpu2.cores }}</td>
+    </tr>
+    <tr>
+      <td>Потоки</td>
+      <td>{{ cpu1.threads }}</td>
+      <td>{{ cpu2.threads }}</td>
+    </tr>
+    <tr>
+      <td>Базовая частота</td>
+      <td>{{ cpu1.base_freq }} ГГц</td>
+      <td>{{ cpu2.base_freq }} ГГц</td>
+    </tr>
+    <tr>
+      <td>Максимальная частота</td>
+      <td>{{ cpu1.max_freq }} ГГц</td>
+      <td>{{ cpu2.max_freq }} ГГц</td>
+    </tr>
+    <tr>
+      <td>Максимальная температура</td>
+      <td>{{ cpu1.max_temp }} ℃</td>
+      <td>{{ cpu2.max_temp }} ℃</td>
+    </tr>
+    <tr>
+      <td>Совместимость с Windows 11</td>
+      <td>{{ cpu1.win11 }}</td>
+      <td>{{ cpu2.win11 }}</td>
+    </tr>
   </table>
   {% else %}
   <p>Данные введены неправильно!</p>

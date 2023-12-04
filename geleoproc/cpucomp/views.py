@@ -51,7 +51,7 @@ def cpucomparison(request):
         return render(request, 'comparsion.html', context=data) 
 
     data = {"CPUS": CPU.objects.all(), "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":True, 
-            "cpu1cost":cpu_model1.cost, "cpu2cost":cpu_model2.cost,
+            "cpu1":cpu_model1, "cpu2":cpu_model2,
               'cart_json':json.dumps(cart_data)}
     
     return render(request, 'comparsion.html', context=data) 

@@ -95,7 +95,7 @@ function addCartItems() {
       </div>
       <div class="cart_elem_2">
           <button name="${key}" class="delete_cart_elem" onClick="deleteCartItem(this)">X
-          <p class="processor_cost">${myData[key].Cost}$</p>
+          <p class="processor_cost">${myData[key].CostAll}₽</p>
       </div>
     `;
 
@@ -119,12 +119,12 @@ function cpuAddToCart(cpuName, cpuCost){
 
   if (cpuName in myData){
     myData[cpuName].Count += 1;
-    myData[cpuName].Cost += Number(cpuCost);
-    cnt_cpu_item += 1;
+    myData[cpuName].CostAll = myData[cpuName].CostOne * myData[cpuName].Count;
   }
   else {
     myData[cpuName] = {
-      'Cost': Number(cpuCost),
+      'CostOne': Number(cpuCost),
+      'CostAll': Number(cpuCost),
       'Count': 1,
     }
     cnt_cpu_item += 1;
@@ -143,6 +143,10 @@ function deleteCartItem(cpuName){
 function CartItemPlus(CartElem){
   cpuName = CartElem.name;
   myData[cpuName].Count += 1;
+  myData[cpuName].CostAll += myData[cpuName].CostOne;
+  let cartElem1 = CartElem.parentElement.parentElement;
+  let processorCostElement = cartElem1.nextElementSibling.querySelector('.processor_cost');
+  processorCostElement.textContent = `${myData[cpuName].CostAll}₽`;
   CartElem.previousSibling.previousSibling.textContent = String(myData[cpuName].Count) + ' ' + 'шт.';
 }
 
@@ -153,6 +157,10 @@ function CartItemMinus(CartElem){
     return
   }
   myData[cpuName].Count -= 1;
+  myData[cpuName].CostAll -= myData[cpuName].CostOne;
+  let cartElem1 = CartElem.parentElement.parentElement;
+  let processorCostElement = cartElem1.nextElementSibling.querySelector('.processor_cost');
+  processorCostElement.textContent = `${myData[cpuName].CostAll}₽`;
   CartElem.nextSibling.nextSibling.textContent = String(myData[cpuName].Count) + ' ' + 'шт.';
 }
 
