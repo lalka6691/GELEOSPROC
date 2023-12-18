@@ -63,11 +63,15 @@ function cartCreate(){
     cartContainer.id = 'cartContainer';
     cart.appendChild(cartContainer);
 
-    let toCartBtn = document.createElement('a');
-    toCartBtn.className = 'cart_btn';
-    toCartBtn.textContent = 'В корзину';
-    toCartBtn.href = '/cart/';
-    cart.appendChild(toCartBtn);
+    if (cnt_cpu_item !== 0)
+    {
+      let toCartBtn = document.createElement('a');
+      toCartBtn.className = 'cart_btn';
+      toCartBtn.textContent = 'В корзину';
+      toCartBtn.href = '/cart/';
+      cart.appendChild(toCartBtn);
+    }
+    
 
     document.body.appendChild(cart);
 }

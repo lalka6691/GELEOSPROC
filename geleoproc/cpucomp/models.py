@@ -16,6 +16,7 @@ class CPU(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    
     def default_cart_data():
         return {'cnt_cart_items': 0}
 
