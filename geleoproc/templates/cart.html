@@ -2,11 +2,20 @@
 
 {% load static %}
 
-
 {% block content %}
 <body class="_body">
-    <div id="myDataElement" data-django-variable="{{ cart_json }}"></div>
+    {% csrf_token %}
+    <link rel="stylesheet" href="{% static 'CSS/style2.css'%}"/>
     <script src="{% static 'JS/cart_page.js' %}"></script>
+    <div id="myDataElement" data-django-variable="{{ cart_json }}"></div>
 
+    <a href="/" class="top_right_links"><i class="fas fa-home"></i> На главную</a>
+
+    <h1 id='h1' class="anim" style="color: rgba(0,212,255,1);">Корзина</h1>
+    
+    <div class="cart_total anim">
+        <p id="total">Итого:</p>
+        <button class="btn">Оформить заказ</button>
+    </div>
 </body>
 {% endblock %}

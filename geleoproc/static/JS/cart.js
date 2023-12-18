@@ -20,6 +20,9 @@ function cartOpen(){
       {
         var emptyCart = document.createElement('p');
         emptyCart.textContent = 'Корзина пуста';
+        emptyCart.style.fontFamily = "'Trebuchet MS', Helvetica, sans-serif";
+        emptyCart.style.color = "White";
+        emptyCart.style.textShadow = "1px 1px 2px black";
         cartContainer.appendChild(emptyCart);
       }
     }
@@ -45,24 +48,26 @@ document.addEventListener('click', function(e)
 function cartCreate(){
     
     let cart = document.createElement('div');
-    cart.className = 'cart animated';
+    cart.className = 'cart animated glass';
     cart.id = 'cart';
 
-    let clearButton = document.createElement('button');
-    clearButton.className = 'clear_cart';
-    clearButton.textContent = 'Очистить корзину';
-    clearButton.onclick = cartEmpty;
-    cart.appendChild(clearButton);
-
+    if (cnt_cpu_item !== 0)
+    {
+      let clearButton = document.createElement('button');
+      clearButton.className = 'clear_cart';
+      clearButton.textContent = 'Очистить корзину';
+      clearButton.onclick = cartEmpty;
+      cart.appendChild(clearButton);
+    }
     let cartContainer = document.createElement('div');
     cartContainer.id = 'cartContainer';
     cart.appendChild(cartContainer);
 
-    // let toCartBtn = document.createElement('a');
-    // toCartBtn.className = 'cart_btn';
-    // toCartBtn.textContent = 'В корзину';
-    // toCartBtn.href = '/cart/';
-    // cart.appendChild(toCartBtn);
+    let toCartBtn = document.createElement('a');
+    toCartBtn.className = 'cart_btn';
+    toCartBtn.textContent = 'В корзину';
+    toCartBtn.href = '/cart/';
+    cart.appendChild(toCartBtn);
 
     document.body.appendChild(cart);
 }
@@ -83,18 +88,18 @@ function addCartItems() {
     if (key === 'cnt_cart_items') continue;
     
     let cartItem = document.createElement('div');
-    cartItem.className = 'cart_elem';
+    cartItem.className = 'cart_elem glass';
     cartItem.innerHTML = `
       <div class="cart_elem_1">
         <p class="processor_name">${key}</p>
         <div class="cart_name_count">
-          <button name="${key}" class="cart_plus_minus" onClick="CartItemMinus(this)">-</button>
+          <button name="${key}" class="cart_minus" onClick="CartItemMinus(this)">-</button>
           <p class="count">${myData[key].Count} шт.</p>
-          <button name="${key}" class="cart_plus_minus" onClick="CartItemPlus(this)">+</button>
+          <button name="${key}" class="cart_plus" onClick="CartItemPlus(this)">+</button>
         </div>
       </div>
       <div class="cart_elem_2">
-          <button name="${key}" class="delete_cart_elem" onClick="deleteCartItem(this)">X
+          <button name="${key}" class="delete_cart_elem" onClick="deleteCartItem(this)">X</button>
           <p class="processor_cost">${myData[key].CostAll}₽</p>
       </div>
     `;

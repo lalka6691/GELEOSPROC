@@ -54,7 +54,7 @@
   </div>
   
   {% if valid_info %}
-  <table border="1" width="75%" cellpadding="5">
+  <table border="0" width="75%" cellpadding="5">
     <tr>
       <td>Название процессора</td>
       <td>{{ cpu1Name }}</td>
@@ -75,7 +75,7 @@
     </tr>
     {% if user.is_authenticated%}
     <tr>
-      <td></td>
+      <td>Купить</td>
       {% if cpu1.cost != 0 %}
       <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpu1Name }}', '{{ cpu1.cost }}')">В корзину</button></td>
       {% else %}
