@@ -1,8 +1,12 @@
 {% extends "base_generic.html" %}
 
+{% load static %}
+
 {% block content %}
-<body class="_body">
+<body class="main_body">
   <p id="logout_text">Вы вышли из аккаунта</p>
   <a href="/" class="btn">Вернуться на главную</a>
+
+  <link rel="stylesheet" href="{% static 'CSS/log_reg.css'%}"/>
 </body>
 {% endblock %}

@@ -3,9 +3,8 @@
 {% load static %}
 
 {% block content %}
-<body class="_body">
+<body>
     {% csrf_token %}
-    <link rel="stylesheet" href="{% static 'CSS/style2.css'%}"/>
     <script src="{% static 'JS/cart_page.js' %}"></script>
     <div id="myDataElement" data-django-variable="{{ cart_json }}"></div>
 
@@ -16,5 +15,8 @@
     <div class="cart_total anim">
         <p id="total">Итоговая цена:</p>
     </div>
+
+    <link rel="stylesheet" href="{% static 'CSS/cart.css'%}"/>
+    <link rel="stylesheet" href="{% static 'CSS/home.css'%}"/>
 </body>
 {% endblock %}

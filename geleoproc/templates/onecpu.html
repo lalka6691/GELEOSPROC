@@ -30,8 +30,8 @@
           <input type="search" value="{{ cpu1Name }}" name="cpu1" class="input_cpu_name comp_input" placeholder="Название" id="input_1" onClick="choiceToggle(this.id)" onkeyup="filterFunction(this.id, 'cpu_list_1'); choiceOpen(this.id);" onsearch="filterFunction(this.id, 'cpu_list_1'); choiceOpen(this.id);">
         </div>
         <div style="top: 47%;" class="cpu_list_items hidden" id="cpu_list_1" >
-          {% for cpu in CPUS %}
-            <p onClick="insertText(this, 'input_1')">{{ cpu.name }}</p>
+          {% for CPU in CPUS %}
+            <p onClick="insertText(this, 'input_1')">{{ CPU.name }}</p>
           {% endfor %}
         </div>
 
@@ -41,8 +41,8 @@
           <input type="search" value="{{ cpu2Name }}" name="cpu2" class="input_cpu_name comp_input" placeholder="Название" id="input_2" onClick="choiceToggle(this.id)" onkeyup="filterFunction(this.id, 'cpu_list_2'); choiceOpen(this.id);" onsearch="filterFunction(this.id, 'cpu_list_2'); choiceOpen(this.id);">
         </div>
         <div style="top: 47%;" class="cpu_list_items hidden" id="cpu_list_2">
-          {% for cpu in CPUS %}
-            <p onClick="insertText(this, 'input_2')">{{ cpu.name }}</p>
+          {% for CPU in CPUS %}
+            <p onClick="insertText(this, 'input_2')">{{ CPU.name }}</p>
           {% endfor %}
         </div>
       </div>
@@ -54,21 +54,15 @@
   </div>
   
   {% if valid_info %}
-  <table border="0" width="75%" cellpadding="5">
+  <table border="0" width="75%" cellpadding="5" style="">
     <tr>
       <td>Название процессора</td>
-      <td>{{ cpu1Name }}</td>
-      <td>{{ cpu2Name }}</td> 
+      <td>{{ cpuName }}</td>
     </tr>
     <tr>
       <td>Цена</td>
-      {% if cpu1.cost != 0 %}
-      <td>{{ cpu1.cost }} ₽</td>
-      {% else %}
-      <td>-</td>
-      {% endif %}
-      {% if cpu2.cost != 0 %}
-      <td>{{ cpu2.cost }} ₽</td>
+      {% if cpu.cost != 0 %}
+      <td>{{ cpu.cost }} ₽</td>
       {% else %}
       <td>-</td>
       {% endif %}
@@ -76,13 +70,8 @@
     {% if user.is_authenticated%}
     <tr>
       <td>Купить</td>
-      {% if cpu1.cost != 0 %}
-      <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpu1Name }}', '{{ cpu1.cost }}')">В избранное</button></td>
-      {% else %}
-      <td></td>
-      {% endif %}
-      {% if cpu2.cost != 0 %}
-      <td><button id="buy_btn2" class="btn" onClick="cpuAddToCart('{{ cpu2Name }}', '{{ cpu2.cost }}')">В избранное</button></td> 
+      {% if cpu.cost != 0 %}
+      <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpuName }}', '{{ cpu.cost }}')">В избранное</button></td>
       {% else %}
       <td></td>
       {% endif %}
@@ -90,33 +79,27 @@
     {% endif %}
     <tr>
       <td>Ядра</td>
-      <td>{{ cpu1.cores }}</td>
-      <td>{{ cpu2.cores }}</td>
+      <td>{{ cpu.cores }}</td>
     </tr>
     <tr>
       <td>Потоки</td>
-      <td>{{ cpu1.threads }}</td>
-      <td>{{ cpu2.threads }}</td>
+      <td>{{ cpu.threads }}</td>
     </tr>
     <tr>
       <td>Базовая частота</td>
-      <td>{{ cpu1.base_freq }} ГГц</td>
-      <td>{{ cpu2.base_freq }} ГГц</td>
+      <td>{{ cpu.base_freq }} ГГц</td>
     </tr>
     <tr>
       <td>Максимальная частота</td>
-      <td>{{ cpu1.max_freq }} ГГц</td>
-      <td>{{ cpu2.max_freq }} ГГц</td>
+      <td>{{ cpu.max_freq }} ГГц</td>
     </tr>
     <tr>
       <td>Максимальная температура</td>
-      <td>{{ cpu1.max_temp }} ℃</td>
-      <td>{{ cpu2.max_temp }} ℃</td>
+      <td>{{ cpu.max_temp }} ℃</td>
     </tr>
     <tr>
       <td>Совместимость с Windows 11</td>
-      <td>{{ cpu1.win11 }}</td>
-      <td>{{ cpu2.win11 }}</td>
+      <td>{{ cpu.win11 }}</td>
     </tr>
   </table>
   {% else %}

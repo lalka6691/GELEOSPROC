@@ -10,9 +10,9 @@ from django.core.validators import validate_email
 
 
 
-def index(request):
+def comp(request):
     data = {"CPUS": CPU.objects.all()} 
-    return render(request, 'index.html', context=data) 
+    return render(request, 'comp.html', context=data) 
 
 
 
@@ -39,22 +39,41 @@ def cpucomparison(request):
     cpu1 = request.POST.get("cpu1")
     cpu2 = request.POST.get("cpu2")
     
+    cpu1Selected = cpu1 != ''
+    cpu2Selected = cpu2 != ''
 
-    try:
-        cpu_model1 = CPU.objects.get(name=cpu1)
-        cpu_model2 = CPU.objects.get(name=cpu2)
-        
-    except:
-        data = {"CPUS": CPU.objects.all(), "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":False,
-                 'cart_json':json.dumps(cart_data)}
-        
-        return render(request, 'comparsion.html', context=data) 
+    if cpu1Selected and cpu2Selected:
+        try:
+            cpu_model1 = CPU.objects.get(name=cpu1)
+            cpu_model2 = CPU.objects.get(name=cpu2)
+            
+        except:
+            data = {"CPUS": CPU.objects.all(), "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":False,
+                    'cart_json':json.dumps(cart_data)}
+            
+            return render(request, 'comparsion.html', context=data) 
 
-    data = {"CPUS": CPU.objects.all(), "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":True, 
-            "cpu1":cpu_model1, "cpu2":cpu_model2,
-              'cart_json':json.dumps(cart_data)}
-    
-    return render(request, 'comparsion.html', context=data) 
+        data = {"CPUS": CPU.objects.all(), "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":True, 
+                "cpu1":cpu_model1, "cpu2":cpu_model2,
+                'cart_json':json.dumps(cart_data)}
+        
+        return render(request, 'comparsion.html', context=data)
+
+    else:
+        try:
+            if cpu1Selected:
+                cpu_model = CPU.objects.get(name=cpu1)
+            else:
+                cpu_model = CPU.objects.get(name=cpu2)
+        except:
+            data = {"CPUS": CPU.objects.all(), "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":False,
+                    'cart_json':json.dumps(cart_data)}
+            
+            return render(request, 'comparsion.html', context=data) 
+        
+        data = {"CPUS": CPU.objects.all(), "cpuName":cpu_model.name, "cpu1Name":cpu1, "cpu2Name":cpu2, "valid_info":True, 
+                "cpu":cpu_model, 'cart_json':json.dumps(cart_data)}
+        return render(request, 'onecpu.html', context=data)
 
 
 

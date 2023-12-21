@@ -1,0 +1,139 @@
+body{
+    background: linear-gradient(180deg, rgba(5,0,90,1) 0%, rgba(17,17,150,1) 35%, rgba(0,212,255,1) 100%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-attachment: fixed;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    margin: 0;
+    padding: 0; 
+}
+
+.log_reg_elements{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+.log_reg_elements p {
+    margin: 5px;
+}
+
+#register_title{
+    width: auto;
+}
+
+#login_title, #register_title{
+    text-align: center;
+}
+
+.log_reg_back {
+    width: 33%;
+    background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, .2);
+    border-radius: 15px;
+    animation: showDown 0.7s;
+}
+
+@keyframes showDown {
+    from {transform:translate(0%, -75%);}
+    to {transform:translate(0%, 0%);}
+}
+
+.top_right_links {
+    background-color: rgba(0,212,255,1);
+    padding: 10px;
+    color: black;
+    border-width: 0px;
+    border-radius: 5px;
+    position:absolute;
+    top: 15px;
+    right: 15px;
+    text-decoration: none;
+    box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, .2);
+}
+
+.log_reg_input, #login_send_btn , #reg_send_btn {
+    background-color: rgba(208, 208, 208, 0.552);
+    width: 80%;
+    padding: 5px;
+    height: 45px;
+    margin: 20px;
+    border-radius: 5px;
+    color: white;
+    border-color: white;
+    border-width: 0px;
+    text-align: left;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
+.log_reg_input::placeholder {
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    color: white;
+  }
+
+.log_reg_links {
+    margin: 20px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log_reg_links a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+#login_send_btn, #reg_send_btn {
+    background-color: rgba(0,212,255,1);
+    width: 25%;
+    text-align: center;
+    cursor: pointer;
+}
+  
+  #reg_send_btn {
+    width: 60%;
+    margin: 10px;
+}
+
+.title {
+    color: rgba(0,212,255,1);
+    font-size: 24px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+#logout_text{
+    color: white;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    font-size: 24px;
+}
+
+.btn{
+    cursor: pointer;
+    background-color: rgba(0,212,255,1);
+    padding: 10px;
+    margin: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: black;
+    border-width: 0px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-family: 'Trebuchet MS', Helvetica, sans-serif;
+    box-shadow: 10px 5px 10px 5px rgba(0, 0, 0, .2);
+}

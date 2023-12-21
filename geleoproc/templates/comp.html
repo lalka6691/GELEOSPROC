@@ -6,18 +6,18 @@
 
 <a href="/" class="top_right_links"><i class="fas fa-home"></i> На главную</a>
 
-<body class="_body">
-  <div class="log_reg_back">
+<body>
+  <div class="comp_back">
     <form method="POST" action="/cpucomparison/">
       {% csrf_token %}
-    <div class="log_reg_elements">
+    <div class="comp_elements">
       <div id="comp_title" class="title">
         <h1>Сравнить процессоры</h1>
       </div>
       <form method="POST" action="/cpucomparison/">
       <div class="cpu_choice">
         <div>
-          <input type="search" name="cpu1" class="input_cpu_name log_reg_input" placeholder="Название" id="input_1" onClick="choiceToggle(this.id)" onkeyup="filterFunction(this.id, 'cpu_list_1'); choiceOpen(this.id);" onsearch="filterFunction(this.id, 'cpu_list_1'); choiceOpen(this.id);">
+          <input type="search" name="cpu1" class="input_cpu_name comp_input" placeholder="Название" id="input_1" onClick="choiceToggle(this.id)" onkeyup="filterFunction(this.id, 'cpu_list_1'); choiceOpen(this.id);" onsearch="filterFunction(this.id, 'cpu_list_1'); choiceOpen(this.id);">
         </div>
         <div class="cpu_list_items hidden" id="cpu_list_1" >
           {% for cpu in CPUS %}
@@ -28,7 +28,7 @@
         <p> VS </p>
 
         <div>
-          <input type="search" name="cpu2" class="input_cpu_name log_reg_input" placeholder="Название" id="input_2" onClick="choiceToggle(this.id)" onkeyup="filterFunction(this.id, 'cpu_list_2'); choiceOpen(this.id);" onsearch="filterFunction(this.id, 'cpu_list_2'); choiceOpen(this.id);">
+          <input type="search" name="cpu2" class="input_cpu_name comp_input" placeholder="Название" id="input_2" onClick="choiceToggle(this.id)" onkeyup="filterFunction(this.id, 'cpu_list_2'); choiceOpen(this.id);" onsearch="filterFunction(this.id, 'cpu_list_2'); choiceOpen(this.id);">
         </div>
         <div class="cpu_list_items hidden" id="cpu_list_2">
           {% for cpu in CPUS %}
@@ -42,7 +42,8 @@
     </div>
   </form>
   </div>
-<script src="{% static 'JS/script.js' %}"></script>
-<link rel="stylesheet" href="{% static 'CSS/style2.css'%}"/>
+
+  <script src="{% static 'JS/comparsion.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'CSS/comp.css'%}"/>
 </body>
 {% endblock %}

@@ -11,73 +11,71 @@ document.addEventListener("DOMContentLoaded", function()
 );
 
 function cartOpen(){
-    let cart = document.getElementById("cart");
-    if (cart === null)
+  let cart = document.getElementById("cart");
+  if (cart === null)
+  {
+    cartCreate();
+    addCartItems(); 
+    if (cnt_cpu_item === 0)
     {
-      cartCreate();
-      addCartItems(); 
-      if (cnt_cpu_item === 0)
-      {
-        var emptyCart = document.createElement('p');
-        emptyCart.textContent = 'Корзина пуста';
-        emptyCart.style.fontFamily = "'Trebuchet MS', Helvetica, sans-serif";
-        emptyCart.style.color = "White";
-        emptyCart.style.textShadow = "1px 1px 2px black";
-        cartContainer.appendChild(emptyCart);
-      }
+      var emptyCart = document.createElement('p');
+      emptyCart.textContent = 'Корзина пуста';
+      emptyCart.style.fontFamily = "'Trebuchet MS', Helvetica, sans-serif";
+      emptyCart.style.color = "White";
+      emptyCart.style.textShadow = "1px 1px 2px black";
+      cartContainer.appendChild(emptyCart);
     }
-    else
-    {
-      cartDelete(cart);
-    }
+  }
+  else
+  {
+    cartDelete(cart);
+  }
 }
 
 document.addEventListener('click', function(e) 
   {
-      let cart = document.getElementById('cart');
-      if (cart !== null)
+    let cart = document.getElementById('cart');
+    let icon = document.getElementById('icon');
+    if (cart !== null)
+    {
+      if (!e.target.matches('.cart, .cart *, .btn, #icon') && e.target !== icon) 
       {
-        if (!e.target.matches('.cart, .cart *, .btn')) 
-        {
-        cartDelete(cart);
-        }  
-      }
+      cartDelete(cart);
+      }  
+    }
   }
 );
 
 function cartCreate(){
-    
-    let cart = document.createElement('div');
-    cart.className = 'cart animated glass';
-    cart.id = 'cart';
+  let cart = document.createElement('div');
+  cart.className = 'cart animated glass';
+  cart.id = 'cart';
 
-    if (cnt_cpu_item !== 0)
-    {
-      let clearButton = document.createElement('button');
-      clearButton.className = 'clear_cart';
-      clearButton.textContent = 'Очистить корзину';
-      clearButton.onclick = cartEmpty;
-      cart.appendChild(clearButton);
-    }
-    let cartContainer = document.createElement('div');
-    cartContainer.id = 'cartContainer';
-    cart.appendChild(cartContainer);
+  if (cnt_cpu_item !== 0)
+  {
+    let clearButton = document.createElement('button');
+    clearButton.className = 'clear_cart';
+    clearButton.textContent = 'Очистить корзину';
+    clearButton.onclick = cartEmpty;
+    cart.appendChild(clearButton);
+  }
+  let cartContainer = document.createElement('div');
+  cartContainer.id = 'cartContainer';
+  cart.appendChild(cartContainer);
 
-    if (cnt_cpu_item !== 0)
-    {
-      let toCartBtn = document.createElement('a');
-      toCartBtn.className = 'cart_btn';
-      toCartBtn.textContent = 'В избранное';
-      toCartBtn.href = '/cart/';
-      cart.appendChild(toCartBtn);
-    }
-    
+  if (cnt_cpu_item !== 0)
+  {
+    let toCartBtn = document.createElement('a');
+    toCartBtn.className = 'cart_btn';
+    toCartBtn.textContent = 'В избранное';
+    toCartBtn.href = '/cart/';
+    cart.appendChild(toCartBtn);
+  }
 
-    document.body.appendChild(cart);
+  document.body.appendChild(cart);
 }
 
 function cartDelete(cart){
-
   cart.classList.add('animated-fade-out');
 
   cart.addEventListener('animationend', function() 
@@ -114,12 +112,12 @@ function addCartItems() {
 }
 
 function cartEmpty(){
-    cnt_cpu_item = 0;
-    myData = {
-      'cnt_cart_items': 0
-    }
-    let cart = document.getElementById('cart');
-    cartDelete(cart);
+  cnt_cpu_item = 0;
+  myData = {
+    'cnt_cart_items': 0
+  }
+  let cart = document.getElementById('cart');
+  cartDelete(cart);
 }
 
 function cpuAddToCart(cpuName, cpuCost){
@@ -144,7 +142,7 @@ function cpuAddToCart(cpuName, cpuCost){
 
 function deleteCartItem(cpuName){
   let cart = document.getElementById('cart');
-  delete myData[cpuName];
+  delete myData[cpuName.name];
   if (cart !== null) cartDelete(cart);
   cnt_cpu_item -= 1;
 }
@@ -162,7 +160,7 @@ function CartItemPlus(CartElem){
 function CartItemMinus(CartElem){
   cpuName = CartElem.name;
   if (myData[cpuName].Count === 1){
-    deleteCartItem(cpuName);
+    deleteCartItem(CartElem);
     return
   }
   myData[cpuName].Count -= 1;
@@ -172,6 +170,8 @@ function CartItemMinus(CartElem){
   processorCostElement.textContent = `${myData[cpuName].CostAll}₽`;
   CartElem.nextSibling.nextSibling.textContent = String(myData[cpuName].Count) + ' ' + 'шт.';
 }
+
+
 
 window.addEventListener('beforeunload', function(event) 
   {
@@ -183,40 +183,11 @@ window.addEventListener('beforeunload', function(event)
     
     let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
-      xhr.open('POST', '/ajax_post_cart/', true);
-      xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-      xhr.setRequestHeader('X-CSRFToken', csrfToken);
+    xhr.open('POST', '/ajax_post_cart/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('X-CSRFToken', csrfToken);
 
-      xhr.onload = function() 
-      {
-        if (xhr.status >= 200 && xhr.status < 300) 
-        {
-          let response = JSON.parse(xhr.responseText);
-          if (response.success) 
-          {
-            console.log('Данные успешно добавлены');
-          } 
-          else 
-          {
-            alert('Произошла ошибка');
-            console.error('Произошла ошибка:', response.errors);
-          }
-        } 
-        else 
-        {
-          alert('Произошла ошибка при выполнении запроса.');
-          console.error('Произошла ошибка при выполнении запроса.');
-        }
-      };
-
-      xhr.onerror = function() 
-      {
-        alert('Произошла ошибка при выполнении запроса.');
-        console.error('Произошла ошибка при выполнении запроса.');
-      };
-
-      xhr.send(JSON.stringify(data));
-
+    xhr.send(JSON.stringify(data));
   }
 );
 

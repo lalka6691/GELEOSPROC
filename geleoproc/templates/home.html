@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block content %}
-<body class="_body">
+<body>
   {% csrf_token %}
   <div id="myDataElement" data-django-variable="{{ cart_json }}"></div>
   <script src="{% static 'JS/cart.js' %}"></script>
@@ -21,13 +21,15 @@
   {% if user.is_authenticated %}
 
   <div class="top_right_links_home">
-    <button class="btn" onclick="cartOpen()"><i class="fas fa-star"></i> Избранное</button>
-    <a href="/accounts/logout/"><i class="fas fa-sign-out-alt"></i> Выход</a>
+    <button class="btn" onclick="cartOpen()"><i class="fas fa-star" id="icon"></i> Избранное</button>
+    <a href="/accounts/logout/"><i class="fas fa-sign-out-alt"></i> Выйти из аккаунта</a>
   </div>
 
   {% else %}
-    <a href="/accounts/login/" class="top_right_links"><i class="fas fa-sign-in-alt"></i> Вход</a>
+    <a href="/accounts/login/" class="top_right_links"><i class="fas fa-sign-in-alt"></i> Войти в аккаунт</a>
   {% endif %}
 
+  <link rel="stylesheet" href="{% static 'CSS/home.css'%}"/>
+  <link rel="stylesheet" href="{% static 'CSS/cart.css'%}"/>
 </body>
 {% endblock %}

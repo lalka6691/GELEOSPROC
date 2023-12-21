@@ -9,7 +9,7 @@ urlpatterns = [
     path('accounts/register/', register),
     path('accounts/', include('django.contrib.auth.urls')),
     path('WIP/', WIP),
-    path('cpucomp/', index),
+    path('cpucomp/', comp),
     path('cart/', cart),
     path('ajax_post_cart/', ajax_post_cart, name='ajax_post_cart'),
 ]
