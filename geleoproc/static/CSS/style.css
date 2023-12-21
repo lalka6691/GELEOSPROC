@@ -89,6 +89,7 @@ margin-bottom: 20px;
   background-color: rgba(0,212,255,1);
   width: 25%;
   text-align: center;
+  cursor: pointer;
 }
 
 #reg_send_btn {
@@ -100,7 +101,9 @@ margin-bottom: 20px;
   margin: 20px;
   width: 90%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .log_reg_links a {
@@ -130,7 +133,7 @@ margin-bottom: 20px;
 
 .top_right_links_home {
   display: flex;
-  width: 180px;
+  width: 250px;
   justify-content: space-between;
   position: absolute;
   top: 15px;
@@ -141,6 +144,9 @@ margin-bottom: 20px;
   cursor: pointer;
   background-color: rgba(0,212,255,1);
   padding: 10px;
+  margin: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   color: black;
   border-width: 0px;
   border-radius: 5px;

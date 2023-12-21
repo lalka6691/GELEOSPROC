@@ -16,17 +16,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function drawCart(){
   let h1elem = document.getElementById('h1');
-    if (cnt_cpu_item === 0) {
+    
+  let cart = document.createElement('div');
+  cart.className = 'cart_page_back anim glass';
+  cart.id = 'cart';
 
-    }
-    else {
-      let cart = document.createElement('div');
-      cart.className = 'cart_page_back anim glass';
-      cart.id = 'cart';
+  // document.body.appendChild(cart);
+  h1elem.insertAdjacentElement('afterend', cart);
 
-      // document.body.appendChild(cart);
-      h1elem.insertAdjacentElement('afterend', cart);
-    }
 }
 
 function addCartItems() {
@@ -73,7 +70,7 @@ function CalcTotal(){
     if (key === 'cnt_cart_items') continue;
     summ += myData[key].CostAll;
   }
-  TotalElem.innerText = "Итого: " + summ.toString() + " ₽ ";
+  TotalElem.innerText = "Итоговая цена: " + summ.toString() + " ₽ ";
 }
 
 function deleteCartItem(CartElem){
@@ -115,36 +112,39 @@ window.addEventListener('beforeunload', function(event)
     
     let csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
-      xhr.open('POST', '/ajax_post_cart/', true);
-      xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-      xhr.setRequestHeader('X-CSRFToken', csrfToken);
+    xhr.open('POST', '/ajax_post_cart/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+    xhr.setRequestHeader('X-CSRFToken', csrfToken);
 
-      xhr.onload = function() 
+    xhr.onload = function() 
+    {
+      if (xhr.status >= 200 && xhr.status < 300) 
       {
-        if (xhr.status >= 200 && xhr.status < 300) 
+        let response = JSON.parse(xhr.responseText);
+        if (response.success) 
         {
-          var response = JSON.parse(xhr.responseText);
-          if (response.success) 
-          {
-            console.log('Данные успешно добавлены');
-          } 
-          else 
-          {
-            console.error('Произошла ошибка:', response.errors);
-          }
+          console.log('Данные успешно добавлены');
         } 
         else 
         {
-          console.error('Произошла ошибка при выполнении запроса.');
+          alert('Произошла ошибка');
+          console.error('Произошла ошибка:', response.errors);
         }
-      };
-
-      xhr.onerror = function() 
+      } 
+      else 
       {
+        alert('Произошла ошибка при выполнении запроса.');
         console.error('Произошла ошибка при выполнении запроса.');
-      };
+      }
+    };
 
-      xhr.send(JSON.stringify(data));
+    xhr.onerror = function() 
+    {
+      alert('Произошла ошибка при выполнении запроса.');
+      console.error('Произошла ошибка при выполнении запроса.');
+    };
+
+    xhr.send(JSON.stringify(data));
 
   }
 );

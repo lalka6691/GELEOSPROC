@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", function() {
   filterFunction("input_2", "cpu_list_2");
 });
 
-function filterFunction(idinp, iddiv) {
-  var input, filter, div, p, i, txtValue;
-  input = document.getElementById(idinp);
+function filterFunction(id_inp, id_div) {
+  let input, filter, div, p, i, txtValue;
+  input = document.getElementById(id_inp);
   filter = input.value.toUpperCase();
-  div = document.getElementById(iddiv);
+  div = document.getElementById(id_div);
   p = div.getElementsByTagName("p");
-  var visibleCounter = 0;
+  let visibleCounter = 0;
   
   for (i = 0; i < p.length; i++) {
     txtValue = p[i].textContent || p[i].innerText;
@@ -27,46 +27,48 @@ function filterFunction(idinp, iddiv) {
 }
 
 function insertText(element, inputId) {
-  var selectedText = element.innerText;
-  var firstParentId = element.parentElement.id; // ID первого родителя (родительский элемент <div>)
+  let selectedText = element.innerText;
+  let firstParentId = element.parentElement.id; // ID первого родителя (родительский элемент <div>)
   document.getElementById(inputId).value = selectedText;
 
   filterFunction(inputId, firstParentId);
 }
 
 function choiceToggle(inputID){
+  let choiceItems; 
   if (inputID === "input_1"){
-    var choiceItems = document.getElementById("cpu_list_1");
+    choiceItems = document.getElementById("cpu_list_1");
   }
   else{
-    var choiceItems = document.getElementById("cpu_list_2");
+    choiceItems = document.getElementById("cpu_list_2");
   }
   choiceItems.classList.toggle('hidden');
 }
 
 function choiceOpen(inputID){
+  let choiceItems; 
   if (inputID === "input_1"){
-    var choiceItems = document.getElementById("cpu_list_1");
+    choiceItems = document.getElementById("cpu_list_1");
   }
   else{
-    var choiceItems = document.getElementById("cpu_list_2");
+    choiceItems = document.getElementById("cpu_list_2");
   }
   choiceItems.classList.remove('hidden');
 }
 
 document.addEventListener('click', function(e) {
-  var input1 = document.getElementById("input_1");
-  var input2 = document.getElementById("input_2");
+  let input1 = document.getElementById("input_1");
+  let input2 = document.getElementById("input_2");
 
   if (!input1.classList.contains("hidden")){
-    var choiceItems = document.getElementById('cpu_list_1');
+    let choiceItems = document.getElementById('cpu_list_1');
     if (!e.target.matches('#cpu_list_1, #input_1')) {
       choiceItems.classList.add('hidden');
     }  
   }
 
   if (!input2.classList.contains("hidden")){
-    var choiceItems = document.getElementById('cpu_list_2');
+    let choiceItems = document.getElementById('cpu_list_2');
     if (!e.target.matches('#cpu_list_2, #input_2')) {
       choiceItems.classList.add('hidden');
     }  

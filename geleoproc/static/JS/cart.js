@@ -67,7 +67,7 @@ function cartCreate(){
     {
       let toCartBtn = document.createElement('a');
       toCartBtn.className = 'cart_btn';
-      toCartBtn.textContent = 'В корзину';
+      toCartBtn.textContent = 'В избранное';
       toCartBtn.href = '/cart/';
       cart.appendChild(toCartBtn);
     }
@@ -191,24 +191,27 @@ window.addEventListener('beforeunload', function(event)
       {
         if (xhr.status >= 200 && xhr.status < 300) 
         {
-          var response = JSON.parse(xhr.responseText);
+          let response = JSON.parse(xhr.responseText);
           if (response.success) 
           {
             console.log('Данные успешно добавлены');
           } 
           else 
           {
+            alert('Произошла ошибка');
             console.error('Произошла ошибка:', response.errors);
           }
         } 
         else 
         {
+          alert('Произошла ошибка при выполнении запроса.');
           console.error('Произошла ошибка при выполнении запроса.');
         }
       };
 
       xhr.onerror = function() 
       {
+        alert('Произошла ошибка при выполнении запроса.');
         console.error('Произошла ошибка при выполнении запроса.');
       };
 
@@ -216,3 +219,4 @@ window.addEventListener('beforeunload', function(event)
 
   }
 );
+

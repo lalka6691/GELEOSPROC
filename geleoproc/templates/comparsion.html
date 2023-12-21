@@ -8,8 +8,8 @@
 
   {% if user.is_authenticated %}
 
-  <div class="top_right_links_home" style="width: 220px;">
-    <button class="btn" onclick="cartOpen()"><i class="fas fa-shopping-cart"></i> Корзина</button>
+  <div class="top_right_links_home" style="width: 280px;">
+    <button class="btn" onclick="cartOpen()"><i class="fas fa-star"></i> Избранное</button>
     <a href="/"><i class="fas fa-home"></i> На главную</a>
   </div>
 
@@ -77,12 +77,12 @@
     <tr>
       <td>Купить</td>
       {% if cpu1.cost != 0 %}
-      <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpu1Name }}', '{{ cpu1.cost }}')">В корзину</button></td>
+      <td><button id="buy_btn1" class="btn" onClick="cpuAddToCart('{{ cpu1Name }}', '{{ cpu1.cost }}')">В избранное</button></td>
       {% else %}
       <td></td>
       {% endif %}
       {% if cpu2.cost != 0 %}
-      <td><button id="buy_btn2" class="btn" onClick="cpuAddToCart('{{ cpu2Name }}', '{{ cpu2.cost }}')">В корзину</button></td> 
+      <td><button id="buy_btn2" class="btn" onClick="cpuAddToCart('{{ cpu2Name }}', '{{ cpu2.cost }}')">В избранное</button></td> 
       {% else %}
       <td></td>
       {% endif %}
