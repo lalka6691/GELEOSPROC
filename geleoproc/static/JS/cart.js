@@ -19,7 +19,7 @@ function cartOpen(){
     if (cnt_cpu_item === 0)
     {
       var emptyCart = document.createElement('p');
-      emptyCart.textContent = 'Корзина пуста';
+      emptyCart.textContent = 'Список пуст';
       emptyCart.style.fontFamily = "'Trebuchet MS', Helvetica, sans-serif";
       emptyCart.style.color = "White";
       emptyCart.style.textShadow = "1px 1px 2px black";
@@ -55,7 +55,7 @@ function cartCreate(){
   {
     let clearButton = document.createElement('button');
     clearButton.className = 'clear_cart';
-    clearButton.textContent = 'Очистить корзину';
+    clearButton.textContent = 'Очистить список';
     clearButton.onclick = cartEmpty;
     cart.appendChild(clearButton);
   }

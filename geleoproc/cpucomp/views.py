@@ -42,7 +42,7 @@ def cpucomparison(request):
     cpu1Selected = cpu1 != ''
     cpu2Selected = cpu2 != ''
 
-    if cpu1Selected and cpu2Selected:
+    if cpu1Selected and cpu2Selected and cpu1 != cpu2:
         try:
             cpu_model1 = CPU.objects.get(name=cpu1)
             cpu_model2 = CPU.objects.get(name=cpu2)
